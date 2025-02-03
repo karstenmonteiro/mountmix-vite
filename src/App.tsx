@@ -14,7 +14,6 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AdminDashboard from "./pages/AdminDashboard";
 import AuthPage from "./pages/AuthPage";
-import FloatingChat from "./components/chat/FloatingChat";
 
 const HomePage = () => {
   const location = useLocation();
@@ -108,7 +107,6 @@ const App = () => {
           </Routes>
         </main>
         <Footer />
-        <FloatingChat />
         <Toaster />
         <Sonner />
       </TooltipProvider>

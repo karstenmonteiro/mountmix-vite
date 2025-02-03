@@ -60,79 +60,6 @@ export type Database = {
         }
         Relationships: []
       }
-      chat_messages: {
-        Row: {
-          content: string
-          created_at: string | null
-          id: string
-          sender_id: string | null
-          sender_type: string
-          session_id: string | null
-        }
-        Insert: {
-          content: string
-          created_at?: string | null
-          id?: string
-          sender_id?: string | null
-          sender_type: string
-          session_id?: string | null
-        }
-        Update: {
-          content?: string
-          created_at?: string | null
-          id?: string
-          sender_id?: string | null
-          sender_type?: string
-          session_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "chat_messages_session_id_fkey"
-            columns: ["session_id"]
-            isOneToOne: false
-            referencedRelation: "chat_sessions"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      chat_sessions: {
-        Row: {
-          closed_at: string | null
-          created_at: string | null
-          id: string
-          inquiry_id: string | null
-          status: Database["public"]["Enums"]["chat_status"] | null
-          user_email: string
-          user_name: string
-        }
-        Insert: {
-          closed_at?: string | null
-          created_at?: string | null
-          id?: string
-          inquiry_id?: string | null
-          status?: Database["public"]["Enums"]["chat_status"] | null
-          user_email: string
-          user_name: string
-        }
-        Update: {
-          closed_at?: string | null
-          created_at?: string | null
-          id?: string
-          inquiry_id?: string | null
-          status?: Database["public"]["Enums"]["chat_status"] | null
-          user_email?: string
-          user_name?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "chat_sessions_inquiry_id_fkey"
-            columns: ["inquiry_id"]
-            isOneToOne: false
-            referencedRelation: "inquiries"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       inquiries: {
         Row: {
           admin_response: string | null
@@ -258,7 +185,6 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
-      chat_status: "active" | "closed"
     }
     CompositeTypes: {
       [_ in never]: never

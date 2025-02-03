@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart3, Calendar, MessageSquare, Users, MessageCircle } from "lucide-react";
+import { BarChart3, Calendar, MessageSquare, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import DashboardStats from "@/components/admin/DashboardStats";
 import BookingRequests from "@/components/admin/BookingRequests";
 import Inquiries from "@/components/admin/Inquiries";
 import UserManagement from "@/components/admin/UserManagement";
-import ChatInterface from "@/components/admin/ChatInterface";
 
 const AdminDashboard = () => {
   const { toast } = useToast();
@@ -137,10 +136,6 @@ const AdminDashboard = () => {
             <MessageSquare className="w-4 h-4 mr-2" />
             Inquiries
           </TabsTrigger>
-          <TabsTrigger value="chat">
-            <MessageCircle className="w-4 h-4 mr-2" />
-            Chat
-          </TabsTrigger>
           <TabsTrigger value="users">
             <Users className="w-4 h-4 mr-2" />
             Users
@@ -163,10 +158,6 @@ const AdminDashboard = () => {
             inquiries={inquiries} 
             onRespond={(id, status, response) => handleResponse('inquiry', id, status, response)} 
           />
-        </TabsContent>
-
-        <TabsContent value="chat">
-          <ChatInterface />
         </TabsContent>
 
         <TabsContent value="users">
