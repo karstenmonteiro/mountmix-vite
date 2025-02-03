@@ -1,4 +1,1 @@
 project_id = "rpquqpjhogwxemfgbkyv"
-
-[functions.send-inquiry-response]
-verify_jwt = false
