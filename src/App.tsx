@@ -10,7 +10,6 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 import Cocktails from "./components/Cocktails";
 import About from "./components/About";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AdminDashboard from "./pages/AdminDashboard";
 import AuthPage from "./pages/AuthPage";
@@ -33,7 +32,6 @@ const HomePage = () => {
       <Services />
       <Cocktails />
       <About />
-      <Contact />
     </>
   );
 };

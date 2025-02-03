@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import BookingModal from "./booking/BookingModal";
 
 const Hero = () => {
   return (
@@ -19,9 +20,11 @@ const Hero = () => {
             Professional cocktail catering services for memorable mountain experiences
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-purple hover:bg-purple-dark text-white px-8 py-6 text-lg">
-              Book Your Event
-            </Button>
+            <BookingModal>
+              <Button className="bg-purple hover:bg-purple-dark text-white px-8 py-6 text-lg">
+                Book Your Event
+              </Button>
+            </BookingModal>
             <Button variant="outline" className="border-purple text-purple hover:bg-purple/10 px-8 py-6 text-lg">
               View Services
             </Button>
