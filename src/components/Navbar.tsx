@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { User } from "lucide-react";
+import { User, UserCog } from "lucide-react";
 
 interface NavbarProps {
   scrollToSection: (sectionId: string) => void;
@@ -23,6 +23,7 @@ interface NavbarProps {
 const Navbar = ({ scrollToSection, session }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -34,6 +35,25 @@ const Navbar = ({ scrollToSection, session }: NavbarProps) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      if (session?.user?.id) {
+        const { data, error } = await supabase.rpc('is_admin', {
+          user_id: session.user.id
+        });
+        
+        if (error) {
+          console.error('Error checking admin status:', error);
+          return;
+        }
+        
+        setIsAdmin(data || false);
+      }
+    };
+
+    checkAdminStatus();
+  }, [session]);
 
   const handleSignOut = async () => {
     try {
@@ -74,6 +94,16 @@ const Navbar = ({ scrollToSection, session }: NavbarProps) => {
 
           <div className="hidden md:flex md:items-center md:space-x-4">
             <NavLinks scrollToSection={scrollToSection} />
+            {session && isAdmin && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/admin/dashboard")}
+                className="mr-2"
+              >
+                <UserCog className="h-5 w-5" />
+              </Button>
+            )}
             {session ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -100,6 +130,7 @@ const Navbar = ({ scrollToSection, session }: NavbarProps) => {
             scrollToSection={scrollToSection}
             session={session}
             onSignOut={handleSignOut}
+            isAdmin={isAdmin}
           />
         </div>
       </div>

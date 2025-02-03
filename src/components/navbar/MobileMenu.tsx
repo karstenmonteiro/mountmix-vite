@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Session } from "@supabase/supabase-js";
-import { Menu, X } from "lucide-react";
+import { Menu, UserCog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -18,6 +18,7 @@ interface MobileMenuProps {
   scrollToSection: (sectionId: string) => void;
   session: Session | null;
   onSignOut: () => void;
+  isAdmin: boolean;
 }
 
 const MobileMenu = ({
@@ -26,6 +27,7 @@ const MobileMenu = ({
   scrollToSection,
   session,
   onSignOut,
+  isAdmin,
 }: MobileMenuProps) => {
   const navigate = useNavigate();
 
@@ -53,6 +55,19 @@ const MobileMenu = ({
               isMobile
               onMobileClick={() => setIsOpen(false)}
             />
+            {session && isAdmin && (
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  navigate("/admin/dashboard");
+                  setIsOpen(false);
+                }}
+                className="w-full justify-start"
+              >
+                <UserCog className="h-5 w-5 mr-2" />
+                Admin Dashboard
+              </Button>
+            )}
             {session ? (
               <Button
                 variant="outline"
